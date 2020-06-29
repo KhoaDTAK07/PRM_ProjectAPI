@@ -30,13 +30,13 @@ namespace PRM_ProjectAPI.Controllers
             //if (info != null) return Ok(info);
             //không tim thấy trả về ko tìm thấy
             //else return NotFound();
-            var accountLogin = _context.Accounts
+            var accountLogin = _context.Users
                                 .Where(acc => acc.Username.Equals(userLoginDTO.Username)
                                 && acc.Password.Equals(userLoginDTO.Password))
                                 .Select(acc => new AccountDTO
                                 {
                                     Username = acc.Username,
-                                    Role = acc.Role,
+                                    IsAdmin = acc.IsAdmin,
                                 }).FirstOrDefault();
             return Ok(accountLogin);
         }

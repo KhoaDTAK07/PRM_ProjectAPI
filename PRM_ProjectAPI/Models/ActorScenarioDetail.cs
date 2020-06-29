@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PRM_ProjectAPI.Models
@@ -10,7 +10,7 @@ namespace PRM_ProjectAPI.Models
         public string CharacterName { get; set; }
         public string FileDescriptionPath { get; set; }
 
-        public virtual Actor Actor { get; set; }
+        public virtual User Actor { get; set; }
         public virtual Scenario Scenario { get; set; }
     }
 }

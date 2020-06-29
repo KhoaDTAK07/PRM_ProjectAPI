@@ -11,8 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using PRM_ProjectAPI.Models;
 using PRM_ProjectAPI.Repository;
+using PRM_ProjectAPI.Models;
 
 namespace PRM_ProjectAPI
 {

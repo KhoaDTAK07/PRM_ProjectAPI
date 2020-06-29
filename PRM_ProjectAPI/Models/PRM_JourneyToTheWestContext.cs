@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -15,90 +15,24 @@ namespace PRM_ProjectAPI.Models
         {
         }
 
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Actor> Actors { get; set; }
         public virtual DbSet<ActorScenarioDetail> ActorScenarioDetails { get; set; }
         public virtual DbSet<Scenario> Scenarios { get; set; }
         public virtual DbSet<Tool> Tools { get; set; }
         public virtual DbSet<ToolScenarioDetail> ToolScenarioDetails { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Name=PRM391_Final");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=journeytothewest.database.windows.net;Initial Catalog=PRM_JourneyToTheWest;User ID=khoa;Password=1234567890bB;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
-
-            modelBuilder.Entity<Account>(entity =>
-            {
-                entity.HasKey(e => e.Username);
-
-                entity.ToTable("Account");
-
-                entity.Property(e => e.Username)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Actor>(entity =>
-            {
-                entity.ToTable("Actor");
-
-                entity.Property(e => e.ActorId)
-                    .HasColumnName("ActorID")
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.ActorName)
-                    .IsRequired()
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Dob)
-                    .HasColumnName("DOB")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Image)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Phone)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Sex)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.ActorNavigation)
-                    .WithOne(p => p.Actor)
-                    .HasForeignKey<Actor>(d => d.ActorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Actor_Account");
-            });
 
             modelBuilder.Entity<ActorScenarioDetail>(entity =>
             {
@@ -126,7 +60,7 @@ namespace PRM_ProjectAPI.Models
                     .WithMany(p => p.ActorScenarioDetails)
                     .HasForeignKey(d => d.ActorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ActorScenarioDetail_Actor");
+                    .HasConstraintName("FK_ActorScenarioDetail_User");
 
                 entity.HasOne(d => d.Scenario)
                     .WithMany(p => p.ActorScenarioDetails)
@@ -212,6 +146,58 @@ namespace PRM_ProjectAPI.Models
                     .HasForeignKey(d => d.ToolId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ToolScenarioDetail_Tool");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Username)
+                    .HasName("PK_Actor");
+
+                entity.ToTable("User");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Dob)
+                    .HasColumnName("DOB")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FullName)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Image)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Phone)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sex)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
             });
         }
     }

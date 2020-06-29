@@ -8,6 +8,14 @@ namespace PRM_ProjectAPI.DTOs
     public class AccountDTO
     {
         public string Username { get; set; }
-        public int Role { get; set; }
+        public string FullName { get; set; }
+        public string Sex { get; set; }
+        public string Image { get; set; }
+        public string Description { get; set; }
+        public string Phone { get; set; }
+        public string Emai { get; set; }
+        public DateTime DOB { get; set; }
+        public int IsAdmin { get; set; }
+        public int Status { get; set; }
     }
 }
