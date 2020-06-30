@@ -33,7 +33,7 @@ namespace PRM_ProjectAPI
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // mỗi lần có repository mới add thêm copy ra câu lên rồi đổi tên
-            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

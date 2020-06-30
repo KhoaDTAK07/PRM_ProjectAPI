@@ -13,7 +13,7 @@ namespace PRM_ProjectAPI.DTOs
         public string Image { get; set; }
         public string Description { get; set; }
         public string Phone { get; set; }
-        public string Emai { get; set; }
+        public string Email { get; set; }
         public DateTime DOB { get; set; }
         public int IsAdmin { get; set; }
         public int Status { get; set; }
