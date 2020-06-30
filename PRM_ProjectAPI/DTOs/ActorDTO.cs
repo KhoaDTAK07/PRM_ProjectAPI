@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PRM_ProjectAPI.DTOs
 {
-    public class AccountDTO
+    public class ActorDTO
     {
         public string Username { get; set; }
         public string FullName { get; set; }

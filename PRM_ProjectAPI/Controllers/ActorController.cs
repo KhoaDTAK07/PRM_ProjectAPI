@@ -15,19 +15,19 @@ namespace PRM_ProjectAPI.Controllers
     [ApiController]
     public class ActorController : ControllerBase
     {
-        private readonly IUserRepository _userRepo;
+        private readonly IActorRepository _userRepo;
 
-        public ActorController(IUserRepository userRepo)
+        public ActorController(IActorRepository userRepo)
         {
             _userRepo = userRepo;
         }
 
         //GET: api/Actors
         [HttpGet]
-        public ActionResult<IEnumerable<AccountDTO>> GetListActor(int isAdmin, int status)
+        public ActionResult<IEnumerable<ActorDTO>> GetListActor(int isAdmin, int status)
         {
             var list =  _userRepo.GetActorList(isAdmin, status).ToList();
-            if (list == null) return NotFound();
+            if (list.Count == 0) return NotFound();
             else return Ok(list);
         }
     }
