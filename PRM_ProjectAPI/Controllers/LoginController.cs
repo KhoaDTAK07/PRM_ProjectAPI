@@ -33,7 +33,7 @@ namespace PRM_ProjectAPI.Controllers
             var accountLogin = _context.Users
                                 .Where(acc => acc.Username.Equals(userLoginDTO.Username)
                                 && acc.Password.Equals(userLoginDTO.Password))
-                                .Select(acc => new ActorDTO
+                                .Select(acc => new UserLoginDetailDTO
                                 {
                                     Username = acc.Username,
                                     IsAdmin = acc.IsAdmin,
