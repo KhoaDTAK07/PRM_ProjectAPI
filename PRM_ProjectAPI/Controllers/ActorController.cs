@@ -1,13 +1,9 @@
-using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using PRM_ProjectAPI.DTOs;
+using PRM_ProjectAPI.Repository;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PRM_ProjectAPI.DTOs;
-using PRM_ProjectAPI.Models;
-using PRM_ProjectAPI.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace PRM_ProjectAPI.Controllers
 {
@@ -22,13 +18,52 @@ namespace PRM_ProjectAPI.Controllers
             _userRepo = userRepo;
         }
 
-        //GET: api/Actors
-        [HttpGet]
-        public ActionResult<IEnumerable<ActorDTO>> GetListActor(int isAdmin, int status)
+        //GET: api/actor/getall
+        [HttpGet("getall")]
+        public ActionResult<IEnumerable<ActorDTO>> GetAllActorAvailable()
         {
-            var list =  _userRepo.GetActorList(isAdmin, status).ToList();
-            if (list.Count == 0) return NotFound();
-            else return Ok(list);
+            var list = _userRepo.GetAllActorAvailable().ToList();
+            return Ok(list);
         }
+
+        //GET: api/actor?username={giatri}
+        [HttpGet("")]
+        public ActionResult<IEnumerable<ActorDTO>> GetActorByID(string username = "")
+        {
+            var user = _userRepo.GetActorByID(username).FirstOrDefault();
+            if (user == null) return NotFound("Khong tim thay user");
+            return Ok(user);
+        }
+
+        [HttpPost]
+        // Tu xu ly try catch 
+        public void createNewActor([FromBody] ActorDTO actorDTO)
+        {
+            _userRepo.addNewActor(actorDTO);
+        }
+
+        // PUT api/values/5
+        [HttpPut]
+        public IActionResult updateUser([FromBody] ActorDTO actorDTO)
+        {
+            bool isSuccess = _userRepo.updateActor(actorDTO);
+
+            if (!isSuccess) return NotFound("No no no");
+
+            return Ok("success");
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("")]
+        public IActionResult Delete(string username)
+        {
+            bool isSuccess = _userRepo.deleteActor(username);
+
+            if (!isSuccess) return NotFound("No no no");
+
+            return Ok("success");
+        }
+
+
     }
 }
