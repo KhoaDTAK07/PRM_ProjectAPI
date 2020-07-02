@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -25,7 +25,7 @@ namespace PRM_ProjectAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=journeytothewest.database.windows.net;Initial Catalog=PRM_JourneyToTheWest;User ID=khoa;Password=1234567890bB;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -116,7 +116,6 @@ namespace PRM_ProjectAPI.Models
 
                 entity.Property(e => e.Image)
                     .IsRequired()
-                    .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ToolName)
@@ -179,7 +178,6 @@ namespace PRM_ProjectAPI.Models
 
                 entity.Property(e => e.Image)
                     .IsRequired()
-                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
