@@ -67,17 +67,58 @@ namespace PRM_ProjectAPI.Repository
 
         public IEnumerable<ScenarioDTO> GetScenarioByName(string scenarioName)
         {
-            throw new NotImplementedException();
+            var listScenario = _context.Scenarios
+                                         .Where(scenInfo => scenInfo.Status == 1 && scenInfo.ScenarioName.Contains(scenarioName))
+                                         .Select(scenInfo => new ScenarioDTO
+                                         {
+                                             ScenarioID = scenInfo.ScenarioId,
+                                             ScenarioName = scenInfo.ScenarioName,
+                                             Description = scenInfo.Description,
+                                             Location = scenInfo.Location,
+                                             NumOfScene = scenInfo.NumOfScene,
+                                             StartOnDT = scenInfo.StartOnDt,
+                                             EndOnDT = scenInfo.EndOnDt,
+                                             FileDescriptionPath = scenInfo.FileDescriptionPath,
+                                             Status = scenInfo.Status,
+                                         });
+            return listScenario;
         }
 
         public ScenarioDTO GetScenarioDetailByID(int scenarioID)
         {
-            throw new NotImplementedException();
+            var scenario = _context.Scenarios
+                                         .Where(scenInfo => scenInfo.Status == 1 && scenInfo.ScenarioId == scenarioID)
+                                         .Select(scenInfo => new ScenarioDTO
+                                         {
+                                             ScenarioID = scenInfo.ScenarioId,
+                                             ScenarioName = scenInfo.ScenarioName,
+                                             Description = scenInfo.Description,
+                                             Location = scenInfo.Location,
+                                             NumOfScene = scenInfo.NumOfScene,
+                                             StartOnDT = scenInfo.StartOnDt,
+                                             EndOnDT = scenInfo.EndOnDt,
+                                             FileDescriptionPath = scenInfo.FileDescriptionPath,
+                                             Status = scenInfo.Status,
+                                         }).FirstOrDefault();
+            return scenario;
         }
 
         public bool updateScenario(ScenarioDTO scenarioDTO)
         {
-            throw new NotImplementedException();
+            var scenario = _context.Scenarios.Where(scenInfo => scenInfo.Status == 1 && scenInfo.ScenarioId == scenarioDTO.ScenarioID).FirstOrDefault();
+
+            if (scenario == null) return false;
+
+            scenario.ScenarioName = scenarioDTO.ScenarioName;
+            scenario.Description = scenarioDTO.Description;
+            scenario.Location = scenarioDTO.Location;
+            scenario.NumOfScene = scenarioDTO.NumOfScene;
+            scenario.StartOnDt = scenarioDTO.StartOnDT;
+            scenario.EndOnDt = scenarioDTO.EndOnDT;
+            scenario.FileDescriptionPath = scenarioDTO.FileDescriptionPath;
+
+            _context.SaveChanges();
+            return true;
         }
     }
 
