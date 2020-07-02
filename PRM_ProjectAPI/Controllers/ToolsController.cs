@@ -68,9 +68,9 @@ namespace PRM_ProjectAPI.Controllers
 
         // DELETE: api/Tools/5
         [HttpDelete("")]
-        public IActionResult Delete(string toolName)
+        public IActionResult Delete(int toolID)
         {
-            bool isSuccess = _toolRepo.deleteTool(toolName);
+            bool isSuccess = _toolRepo.deleteTool(toolID);
 
             if (!isSuccess) return NotFound("No no no");
 

@@ -32,9 +32,9 @@ namespace PRM_ProjectAPI.Repository
             _context.SaveChanges();
         }
 
-        public bool deleteTool(string toolName)
+        public bool deleteTool(int toolID)
         {
-            var tool = _context.Tools.Where(toolInfo => toolInfo.ToolName == toolName).FirstOrDefault();
+            var tool = _context.Tools.Where(toolInfo => toolInfo.ToolId == toolID).FirstOrDefault();
 
             if (tool == null) return false;
             tool.Status = 0;
@@ -90,10 +90,10 @@ namespace PRM_ProjectAPI.Repository
                                          }).FirstOrDefault();
             return tool;
         }
-
+        
         public bool updateTool(ToolDTO toolDTO)
         {
-            var tool = _context.Tools.Where(toolInfo => toolInfo.Status == 1 && toolInfo.ToolName == toolDTO.ToolName).FirstOrDefault();
+            var tool = _context.Tools.Where(toolInfo => toolInfo.Status == 1 && toolInfo.ToolId == toolDTO.ToolID).FirstOrDefault();
 
             if (tool == null) return false;
 
@@ -119,7 +119,7 @@ namespace PRM_ProjectAPI.Repository
 
         bool updateTool(ToolDTO toolDTO);
 
-        bool deleteTool(string toolName);
+        bool deleteTool(int toolID);
     }
 
 }
