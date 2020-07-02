@@ -19,6 +19,7 @@ namespace PRM_ProjectAPI.Models
         public DateTime StartOnDt { get; set; }
         public DateTime EndOnDt { get; set; }
         public string FileDescriptionPath { get; set; }
+        public int Status { get; set; }
 
         public virtual ICollection<ActorScenarioDetail> ActorScenarioDetails { get; set; }
         public virtual ICollection<ToolScenarioDetail> ToolScenarioDetails { get; set; }

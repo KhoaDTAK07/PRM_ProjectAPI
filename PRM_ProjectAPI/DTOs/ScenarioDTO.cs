@@ -15,5 +15,6 @@ namespace PRM_ProjectAPI.DTOs
         public DateTime StartOnDT { get; set; }
         public DateTime EndOnDT { get; set; }
         public String FileDescriptionPath { get; set; }
+        public int Status { get; set; }
     }
 }
