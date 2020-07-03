@@ -21,7 +21,6 @@ namespace PRM_ProjectAPI.Repository
         {
             Tool tool2add = new Tool
             {
-                ToolId = toolDTO.ToolID,
                 ToolName = toolDTO.ToolName,
                 Description = toolDTO.Description,
                 Image = toolDTO.Image,

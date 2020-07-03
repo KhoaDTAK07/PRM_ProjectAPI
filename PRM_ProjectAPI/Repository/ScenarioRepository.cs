@@ -21,7 +21,6 @@ namespace PRM_ProjectAPI.Repository
         {
             Scenario scenario2add = new Scenario
             {
-                ScenarioId = scenarioDTO.ScenarioID,
                 ScenarioName = scenarioDTO.ScenarioName,
                 Description = scenarioDTO.Description,
                 Location = scenarioDTO.Location,

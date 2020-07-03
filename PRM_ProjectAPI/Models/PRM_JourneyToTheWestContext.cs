@@ -73,9 +73,7 @@ namespace PRM_ProjectAPI.Models
             {
                 entity.ToTable("Scenario");
 
-                entity.Property(e => e.ScenarioId)
-                    .HasColumnName("ScenarioID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ScenarioId).HasColumnName("ScenarioID");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -106,9 +104,7 @@ namespace PRM_ProjectAPI.Models
             {
                 entity.ToTable("Tool");
 
-                entity.Property(e => e.ToolId)
-                    .HasColumnName("ToolID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ToolId).HasColumnName("ToolID");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
