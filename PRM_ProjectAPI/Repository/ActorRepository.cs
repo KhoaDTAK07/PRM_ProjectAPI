@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PRM_ProjectAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PRM_ProjectAPI.Repository
 {
@@ -76,7 +77,14 @@ namespace PRM_ProjectAPI.Repository
             };
 
             _context.Users.Add(user2add);
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
 
         }
 
@@ -97,8 +105,16 @@ namespace PRM_ProjectAPI.Repository
             user.IsAdmin = actorDTO.IsAdmin;
             user.Status = actorDTO.Status;
 
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+            
         }
 
         public bool deleteActor(string username)

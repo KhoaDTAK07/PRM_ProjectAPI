@@ -63,7 +63,15 @@ namespace PRM_ProjectAPI.Controllers
         [HttpPost]
         public void createNewTool([FromBody] ToolDTO toolDTO)
         {
-            _toolRepo.addNewTool(toolDTO);
+            try
+            {
+                _toolRepo.addNewTool(toolDTO);
+            }
+            catch
+            {
+                BadRequest();
+            }
+            
         }
 
         // DELETE: api/Tools/5

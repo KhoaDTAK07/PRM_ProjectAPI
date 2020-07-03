@@ -1,4 +1,5 @@
-﻿using PRM_ProjectAPI.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using PRM_ProjectAPI.DTOs;
 using PRM_ProjectAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,15 @@ namespace PRM_ProjectAPI.Repository
             };
 
             _context.Tools.Add(tool2add);
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+            
         }
 
         public bool deleteTool(int toolID)
@@ -103,8 +112,15 @@ namespace PRM_ProjectAPI.Repository
             tool.Amount = toolDTO.Amount;
             tool.Status = toolDTO.Status;
 
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
         }
     }
 

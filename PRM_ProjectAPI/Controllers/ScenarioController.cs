@@ -64,7 +64,14 @@ namespace PRM_ProjectAPI.Controllers
         [HttpPost]
         public void createNewScenario([FromBody] ScenarioDTO scenarioDTO)
         {
-            _scenarioRepo.addNewScenario(scenarioDTO);
+            try
+            {
+                _scenarioRepo.addNewScenario(scenarioDTO);
+            }
+            catch
+            {
+                BadRequest();
+            }
         }
 
         // DELETE: api/Tools/5

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using PRM_ProjectAPI.DTOs;
 using PRM_ProjectAPI.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,7 +40,14 @@ namespace PRM_ProjectAPI.Controllers
         // Tu xu ly try catch 
         public void createNewActor([FromBody] ActorDTO actorDTO)
         {
-            _userRepo.addNewActor(actorDTO);
+            try
+            {
+                _userRepo.addNewActor(actorDTO);
+            }
+            catch (Exception)
+            {
+                BadRequest();
+            }
         }
 
         // PUT api/values/5
