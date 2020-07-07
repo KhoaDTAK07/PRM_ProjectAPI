@@ -25,6 +25,8 @@ namespace PRM_ProjectAPI.Repository
                                 .Select(acc => new UserLoginDetailDTO
                                 {
                                     Username = acc.Username,
+                                    Fullname = acc.FullName,
+                                    Image = acc.Image,
                                     IsAdmin = acc.IsAdmin,
                                 }).FirstOrDefault();
             return accountLogin;

@@ -47,7 +47,6 @@ namespace PRM_ProjectAPI.Controllers
         }
 
         [HttpPost]
-        // Tu xu ly try catch 
         public void createNewActor([FromBody] ActorDTO actorDTO)
         {
             try
