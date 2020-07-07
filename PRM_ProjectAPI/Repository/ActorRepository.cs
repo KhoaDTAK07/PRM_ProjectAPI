@@ -38,6 +38,27 @@ namespace PRM_ProjectAPI.Repository
             return ListActor;
         }
 
+        public IEnumerable<ActorDTO> GetActorByName(string fullName)
+        {
+            var ListActor = _context.Users
+                                          .Where(actInfo => actInfo.IsAdmin == 0
+                                          && actInfo.Status != 0
+                                          && actInfo.FullName.Contains(fullName))
+                                          .Select(actInfo => new ActorDTO
+                                          {
+                                              Username = actInfo.Username,
+                                              FullName = actInfo.FullName,
+                                              Sex = actInfo.Sex,
+                                              Image = actInfo.Image,
+                                              Description = actInfo.Description,
+                                              Phone = actInfo.Phone,
+                                              Email = actInfo.Email,
+                                              DOB = actInfo.Dob,
+                                              Status = actInfo.Status
+                                          });
+            return ListActor;
+        }
+
         public IEnumerable<ActorDTO> GetActorByID(string username)
         {
             var ListActor = _context.Users
@@ -135,6 +156,7 @@ namespace PRM_ProjectAPI.Repository
     {
         IEnumerable<ActorDTO> GetAllActorAvailable();
         IEnumerable<ActorDTO> GetActorByID(string username);
+        IEnumerable<ActorDTO> GetActorByName(string fullName);
 
         void addNewActor(ActorDTO actorDTO);
 

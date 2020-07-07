@@ -27,11 +27,21 @@ namespace PRM_ProjectAPI.Controllers
             return Ok(list);
         }
 
-        //GET: api/actor?username={giatri}
+        // GET: api/actor?fullName={giatri}
         [HttpGet("")]
-        public ActionResult<IEnumerable<ActorDTO>> GetActorByID(string username = "")
+        public ActionResult<IEnumerable<ActorDTO>> GetActorListByName(String fullname = "")
         {
-            var user = _userRepo.GetActorByID(username).FirstOrDefault();
+            var actor = _userRepo.GetActorByName(fullname).ToList();
+
+            if (actor.Count == 0) return NotFound("Khong tim thay user");
+            return Ok(actor);
+        }
+
+        //GET: api/actor?username={giatri}
+        [HttpGet("{username}")]
+        public ActionResult<IEnumerable<ActorDTO>> GetActorByID(String username = "")
+        {
+            var user = _userRepo.GetActorByID(username);
             if (user == null) return NotFound("Khong tim thay user");
             return Ok(user);
         }
