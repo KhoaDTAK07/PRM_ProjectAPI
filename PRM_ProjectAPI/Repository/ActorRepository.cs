@@ -59,9 +59,9 @@ namespace PRM_ProjectAPI.Repository
             return ListActor;
         }
 
-        public IEnumerable<ActorDTO> GetActorByID(string username)
+        public ActorDTO GetActorByID(string username)
         {
-            var ListActor = _context.Users
+            var actor = _context.Users
                                           .Where(actInfo => actInfo.IsAdmin == 0
                                           && actInfo.Username == username)
                                           .Select(actInfo => new ActorDTO
@@ -75,8 +75,8 @@ namespace PRM_ProjectAPI.Repository
                                               Email = actInfo.Email,
                                               DOB = actInfo.Dob,
                                               Status = actInfo.Status
-                                          });
-            return ListActor;
+                                          }).FirstOrDefault();
+            return actor;
         }
         public void addNewActor(ActorDTO actorDTO)
         {
@@ -155,7 +155,7 @@ namespace PRM_ProjectAPI.Repository
     public interface IActorRepository
     {
         IEnumerable<ActorDTO> GetAllActorAvailable();
-        IEnumerable<ActorDTO> GetActorByID(string username);
+        ActorDTO GetActorByID(string username);
         IEnumerable<ActorDTO> GetActorByName(string fullName);
 
         void addNewActor(ActorDTO actorDTO);
