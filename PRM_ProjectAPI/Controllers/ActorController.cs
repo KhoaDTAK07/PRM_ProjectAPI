@@ -47,15 +47,16 @@ namespace PRM_ProjectAPI.Controllers
         }
 
         [HttpPost]
-        public void createNewActor([FromBody] ActorDTO actorDTO)
+        public IActionResult createNewActor([FromBody] ActorDTO actorDTO)
         {
             try
             {
                 _userRepo.addNewActor(actorDTO);
+                return NoContent();
             }
             catch (Exception)
             {
-                BadRequest();
+                return BadRequest();
             }
         }
 
