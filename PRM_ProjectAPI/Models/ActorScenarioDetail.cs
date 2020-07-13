@@ -5,6 +5,7 @@ namespace PRM_ProjectAPI.Models
 {
     public partial class ActorScenarioDetail
     {
+        public int AsdId { get; set; }
         public int ScenarioId { get; set; }
         public string ActorId { get; set; }
         public string CharacterName { get; set; }

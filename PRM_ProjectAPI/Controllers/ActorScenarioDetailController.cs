@@ -32,5 +32,16 @@ namespace PRM_ProjectAPI.Controllers
                 BadRequest();
             }
         }
+
+        // DELETE: api/Tools/5
+        [HttpDelete("")]
+        public IActionResult Delete(int AsdID)
+        {
+            bool isSuccess = _scenarioDetailRepo.deleteActorFromScenario(AsdID);
+
+            if (!isSuccess) return NotFound("No no no");
+
+            return Ok("success");
+        }
     }
 }

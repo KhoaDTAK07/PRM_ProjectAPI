@@ -40,12 +40,22 @@ namespace PRM_ProjectAPI.Repository
             }
         }
 
+        public bool deleteActorFromScenario(int AsdID)
+        {
+            var value = _context.ActorScenarioDetails.Where(info => info.AsdId == AsdID).FirstOrDefault();
+
+            if (value == null) return false;
+            value.Status = 0;
+
+            _context.SaveChanges();
+            return true;
+        }
     }
 
     public interface IActorScenarioDetailRepository
     {
         void addActorToScenario(ActorScenarioDetailDTO actorScenarioDetailDTO);
 
-        
+        bool deleteActorFromScenario(int AsdID);
     }
 }
