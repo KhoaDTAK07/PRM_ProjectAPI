@@ -8,7 +8,7 @@ namespace PRM_ProjectAPI.DTOs
     public class ActorDTO
     {
         public string Username { get; set; }
-        public String Password { get; set; }
+        public string Password { get; set; }
         public string FullName { get; set; }
         public string Sex { get; set; }
         public string Image { get; set; }

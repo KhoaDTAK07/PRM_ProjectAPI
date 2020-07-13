@@ -8,7 +8,9 @@ namespace PRM_ProjectAPI.Models
         public int ScenarioId { get; set; }
         public string ActorId { get; set; }
         public string CharacterName { get; set; }
-        public string FileDescriptionPath { get; set; }
+        public string CreateBy { get; set; }
+        public DateTime CreateOnDt { get; set; }
+        public int Status { get; set; }
 
         public virtual User Actor { get; set; }
         public virtual Scenario Scenario { get; set; }

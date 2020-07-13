@@ -25,8 +25,8 @@ namespace PRM_ProjectAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=journeytothewest.database.windows.net;Initial Catalog=PRM_JourneyToTheWest;User ID=khoa;Password=1234567890bB;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=journeytothewest.database.windows.net;Initial Catalog=PRM_JourneyToTheWest;User ID=khoa;Password=1234567890bB;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False ");
             }
         }
 
@@ -36,25 +36,31 @@ namespace PRM_ProjectAPI.Models
 
             modelBuilder.Entity<ActorScenarioDetail>(entity =>
             {
-                entity.HasKey(e => new { e.ScenarioId, e.ActorId })
-                    .HasName("PK_FileDescriptionPath");
+                entity.HasKey(e => new { e.ScenarioId, e.CharacterName });
 
                 entity.ToTable("ActorScenarioDetail");
 
                 entity.Property(e => e.ScenarioId).HasColumnName("ScenarioID");
 
+                entity.Property(e => e.CharacterName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ActorId)
+                    .IsRequired()
                     .HasColumnName("ActorID")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CharacterName)
+                entity.Property(e => e.CreateBy)
                     .IsRequired()
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FileDescriptionPath)
-                    .IsRequired()
-                    .IsUnicode(false);
+                entity.Property(e => e.CreateOnDt)
+                    .HasColumnName("CreateOnDT")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.Actor)
                     .WithMany(p => p.ActorScenarioDetails)
