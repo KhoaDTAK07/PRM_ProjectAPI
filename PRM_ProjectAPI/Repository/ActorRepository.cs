@@ -94,7 +94,6 @@ namespace PRM_ProjectAPI.Repository
                 Dob = actorDTO.DOB,
                 IsAdmin = actorDTO.IsAdmin,
                 Status = actorDTO.Status
-
             };
 
             _context.Users.Add(user2add);
@@ -125,6 +124,7 @@ namespace PRM_ProjectAPI.Repository
             user.Dob = actorDTO.DOB;
             user.IsAdmin = actorDTO.IsAdmin;
             user.Status = actorDTO.Status;
+            user.UpdateOnDt = actorDTO.updateOnDT;
 
             try
             {

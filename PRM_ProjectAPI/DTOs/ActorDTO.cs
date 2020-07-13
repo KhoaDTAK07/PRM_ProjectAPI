@@ -16,6 +16,7 @@ namespace PRM_ProjectAPI.DTOs
         public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime DOB { get; set; }
+        public DateTime updateOnDT { get; set; }
         public int IsAdmin { get; set; }
         public int Status { get; set; }
     }

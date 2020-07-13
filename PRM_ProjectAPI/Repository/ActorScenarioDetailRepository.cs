@@ -50,10 +50,27 @@ namespace PRM_ProjectAPI.Repository
             _context.SaveChanges();
             return true;
         }
+
+        public IEnumerable<ActorScenarioDetailDTO> GetAllAvailable()
+        {
+            var list = _context.ActorScenarioDetails.Where(info => info.Status == 1)
+                                                    .Select(info => new ActorScenarioDetailDTO
+                                                    {
+                                                        ScenarioID = info.ScenarioId,
+                                                        ActorID = info.ActorId,
+                                                        CharacterName = info.CharacterName,
+                                                        CreateBy = info.CreateBy,
+                                                        Status = info.Status,
+                                                    });
+
+            return list;
+        }
     }
 
     public interface IActorScenarioDetailRepository
     {
+        IEnumerable<ActorScenarioDetailDTO> GetAllAvailable();
+
         void addActorToScenario(ActorScenarioDetailDTO actorScenarioDetailDTO);
 
         bool deleteActorFromScenario(int AsdID);

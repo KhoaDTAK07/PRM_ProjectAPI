@@ -19,6 +19,8 @@ namespace PRM_ProjectAPI.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime Dob { get; set; }
+        public DateTime? CreateOnDt { get; set; }
+        public DateTime? UpdateOnDt { get; set; }
         public int IsAdmin { get; set; }
         public int Status { get; set; }
 

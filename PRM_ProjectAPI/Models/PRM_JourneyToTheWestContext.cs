@@ -165,6 +165,11 @@ namespace PRM_ProjectAPI.Models
                     .IsUnicode(false)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.CreateOnDt)
+                    .HasColumnName("CreateOnDT")
+                    .HasColumnType("date")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .IsUnicode(false);
@@ -202,6 +207,10 @@ namespace PRM_ProjectAPI.Models
                     .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
+
+                entity.Property(e => e.UpdateOnDt)
+                    .HasColumnName("UpdateOnDT")
+                    .HasColumnType("date");
             });
         }
     }
