@@ -208,6 +208,8 @@ namespace PRM_ProjectAPI.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
+                entity.Property(e => e.UpdateBy).IsUnicode(false);
+
                 entity.Property(e => e.UpdateOnDt)
                     .HasColumnName("UpdateOnDT")
                     .HasColumnType("date");

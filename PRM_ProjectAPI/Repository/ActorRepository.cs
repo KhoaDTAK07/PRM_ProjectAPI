@@ -122,9 +122,10 @@ namespace PRM_ProjectAPI.Repository
             user.Phone = actorDTO.Phone;
             user.Email = actorDTO.Email;
             user.Dob = actorDTO.DOB;
+            user.UpdateBy = actorDTO.UpdateBy;
+            user.UpdateOnDt = actorDTO.updateOnDT;
             user.IsAdmin = actorDTO.IsAdmin;
             user.Status = actorDTO.Status;
-            user.UpdateOnDt = actorDTO.updateOnDT;
 
             try
             {
