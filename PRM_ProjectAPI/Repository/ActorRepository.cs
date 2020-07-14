@@ -74,6 +74,8 @@ namespace PRM_ProjectAPI.Repository
                                               Phone = actInfo.Phone,
                                               Email = actInfo.Email,
                                               DOB = actInfo.Dob,
+                                              UpdateBy = actInfo.UpdateBy,
+                                              updateOnDT = actInfo.UpdateOnDt,
                                               Status = actInfo.Status
                                           }).FirstOrDefault();
             return actor;
