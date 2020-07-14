@@ -8,7 +8,9 @@ namespace PRM_ProjectAPI.DTOs
     public class ActorScenarioDetailDTO
     {
         public int ScenarioID { get; set; }
+        public string ScenarioName { get; set; }
         public string ActorID { get; set; }
+        public string FullName { get; set; }
         public string CharacterName { get; set; }
         public string CreateBy { get; set; }
         public int Status { get; set; }

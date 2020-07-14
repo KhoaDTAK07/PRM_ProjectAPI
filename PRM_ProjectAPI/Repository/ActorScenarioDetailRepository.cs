@@ -61,6 +61,8 @@ namespace PRM_ProjectAPI.Repository
                                                         CharacterName = info.CharacterName,
                                                         CreateBy = info.CreateBy,
                                                         Status = info.Status,
+                                                        FullName = info.Actor.FullName,
+                                                        ScenarioName = info.Scenario.ScenarioName,
                                                     });
 
             return list;
