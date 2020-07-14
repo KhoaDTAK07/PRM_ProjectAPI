@@ -36,13 +36,10 @@ namespace PRM_ProjectAPI.Models
 
             modelBuilder.Entity<ActorScenarioDetail>(entity =>
             {
-                entity.HasKey(e => new { e.AsdId, e.ScenarioId, e.CharacterName });
+                entity.HasKey(e => new { e.ScenarioId, e.CharacterName })
+                    .HasName("PK_ActorScenarioDetail_1");
 
                 entity.ToTable("ActorScenarioDetail");
-
-                entity.Property(e => e.AsdId)
-                    .HasColumnName("AsdID")
-                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.ScenarioId).HasColumnName("ScenarioID");
 
@@ -55,6 +52,10 @@ namespace PRM_ProjectAPI.Models
                     .HasColumnName("ActorID")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.AsdId)
+                    .HasColumnName("AsdID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreateBy)
                     .IsRequired()
