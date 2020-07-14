@@ -51,9 +51,10 @@ namespace PRM_ProjectAPI.Repository
             return true;
         }
 
-        public IEnumerable<ActorScenarioDetailDTO> GetAllAvailable()
+        public IEnumerable<ActorScenarioDetailDTO> GetAllAvailableByScenarioID(int scenarioID)
         {
-            var list = _context.ActorScenarioDetails.Where(info => info.Status == 1)
+            var list = _context.ActorScenarioDetails.Where(info => info.Status == 1
+                                                           && info.ScenarioId == scenarioID)
                                                     .Select(info => new ActorScenarioDetailDTO
                                                     {
                                                         AsdID = info.AsdId,
@@ -72,7 +73,7 @@ namespace PRM_ProjectAPI.Repository
 
     public interface IActorScenarioDetailRepository
     {
-        IEnumerable<ActorScenarioDetailDTO> GetAllAvailable();
+        IEnumerable<ActorScenarioDetailDTO> GetAllAvailableByScenarioID(int scenarioID);
 
         void addActorToScenario(ActorScenarioDetailDTO actorScenarioDetailDTO);
 

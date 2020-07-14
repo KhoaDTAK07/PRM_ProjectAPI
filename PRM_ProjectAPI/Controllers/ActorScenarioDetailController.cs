@@ -22,9 +22,9 @@ namespace PRM_ProjectAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public ActionResult<IEnumerable<ActorScenarioDetail>> GetAllScenarioAvaliable()
+        public ActionResult<IEnumerable<ActorScenarioDetail>> GetAllAvaliableByScenarioID(int scenarioID)
         {
-            var list = _scenarioDetailRepo.GetAllAvailable().ToList();
+            var list = _scenarioDetailRepo.GetAllAvailableByScenarioID(scenarioID).ToList();
             return Ok(list);
         }
 
