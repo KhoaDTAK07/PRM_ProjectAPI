@@ -29,15 +29,16 @@ namespace PRM_ProjectAPI.Controllers
         }
 
         [HttpPost]
-        public void addActorToScenario([FromBody] ActorScenarioDetailDTO actorScenarioDetailDTO)
+        public IActionResult addActorToScenario([FromBody] ActorScenarioDetailDTO actorScenarioDetailDTO)
         {
             try
             {
                 _scenarioDetailRepo.addActorToScenario(actorScenarioDetailDTO);
+                return NoContent();
             }
-            catch
+            catch (Exception)
             {
-                BadRequest();
+                return BadRequest();
             }
         }
 
