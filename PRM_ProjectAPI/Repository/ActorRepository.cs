@@ -94,6 +94,7 @@ namespace PRM_ProjectAPI.Repository
                 Phone = actorDTO.Phone,
                 Email = actorDTO.Email,
                 Dob = actorDTO.DOB,
+                CreateOnDt = actorDTO.CreateOnDT,
                 IsAdmin = actorDTO.IsAdmin,
                 Status = actorDTO.Status
             };
