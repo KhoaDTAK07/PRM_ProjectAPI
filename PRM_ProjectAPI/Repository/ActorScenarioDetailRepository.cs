@@ -56,6 +56,7 @@ namespace PRM_ProjectAPI.Repository
             var list = _context.ActorScenarioDetails.Where(info => info.Status == 1)
                                                     .Select(info => new ActorScenarioDetailDTO
                                                     {
+                                                        AsdID = info.AsdId,
                                                         ScenarioID = info.ScenarioId,
                                                         ActorID = info.ActorId,
                                                         CharacterName = info.CharacterName,
