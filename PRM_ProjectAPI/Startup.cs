@@ -41,9 +41,10 @@ namespace PRM_ProjectAPI
             // mỗi lần có repository mới add thêm copy ra câu lên rồi đổi tên
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();       
-            services.AddScoped<IToolRepository, ToolRepository>();
+            services.AddScoped<IToolRepository, ToolRepositoryRepo>();
             services.AddScoped<IScenarioRepository, ScenarioRepository>();
             services.AddScoped<IActorScenarioDetailRepository, ActorScenarioDetailRepository>();
+            services.AddScoped<IToolScenarioDetailRepository, ToolScenarioDetailRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

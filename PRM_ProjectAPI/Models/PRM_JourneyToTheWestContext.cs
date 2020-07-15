@@ -133,13 +133,27 @@ namespace PRM_ProjectAPI.Models
 
             modelBuilder.Entity<ToolScenarioDetail>(entity =>
             {
-                entity.HasKey(e => new { e.ScenarioId, e.ToolId });
+                entity.HasKey(e => e.TsdId);
 
                 entity.ToTable("ToolScenarioDetail");
+
+                entity.Property(e => e.TsdId).HasColumnName("TsdID");
+
+                entity.Property(e => e.CreateOnDt)
+                    .HasColumnName("CreateOnDT")
+                    .HasColumnType("date");
 
                 entity.Property(e => e.ScenarioId).HasColumnName("ScenarioID");
 
                 entity.Property(e => e.ToolId).HasColumnName("ToolID");
+
+                entity.Property(e => e.UpdateBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdateOnDt)
+                    .HasColumnName("UpdateOnDT")
+                    .HasColumnType("date");
 
                 entity.HasOne(d => d.Scenario)
                     .WithMany(p => p.ToolScenarioDetails)

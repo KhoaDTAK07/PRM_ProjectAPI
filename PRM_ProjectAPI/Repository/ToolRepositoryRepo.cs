@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PRM_ProjectAPI.Repository
 {
-    public class ToolRepository : IToolRepository
+    public class ToolRepositoryRepo : IToolRepository
     {
         private readonly PRM_JourneyToTheWestContext _context;
 
-        public ToolRepository(PRM_JourneyToTheWestContext context)
+        public ToolRepositoryRepo(PRM_JourneyToTheWestContext context)
         {
             _context = context;
         }
