@@ -15,5 +15,7 @@ namespace PRM_ProjectAPI.DTOs
         public string CharacterName { get; set; }
         public string CreateBy { get; set; }
         public int Status { get; set; }
+        public DateTime StartOnDt { get; set; }
+        public DateTime EndOnDt { get; set; }
     }
 }

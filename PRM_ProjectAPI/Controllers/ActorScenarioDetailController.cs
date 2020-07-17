@@ -28,6 +28,27 @@ namespace PRM_ProjectAPI.Controllers
             return Ok(list);
         }
 
+        [HttpGet("getHistory")]
+        public ActionResult<IEnumerable<ActorScenarioDetail>> GetHistoryByUsername(string username)
+        {
+            var list = _scenarioDetailRepo.GetAllScenarioHistoryByUsername(username).ToList();
+            return Ok(list);
+        }
+
+        [HttpGet("getInProcess")]
+        public ActionResult<IEnumerable<ActorScenarioDetail>> GetInProcessByUsername(string username)
+        {
+            var list = _scenarioDetailRepo.GetAllScenarioInProcessByUsername(username).ToList();
+            return Ok(list);
+        }
+
+        [HttpGet("getComing")]
+        public ActionResult<IEnumerable<ActorScenarioDetail>> GetComingByUsername(string username)
+        {
+            var list = _scenarioDetailRepo.GetAllScenarioComingByUsername(username).ToList();
+            return Ok(list);
+        }
+
         [HttpPost]
         public IActionResult addActorToScenario([FromBody] ActorScenarioDetailDTO actorScenarioDetailDTO)
         {

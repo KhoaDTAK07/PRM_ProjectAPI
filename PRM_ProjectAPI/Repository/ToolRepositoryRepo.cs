@@ -37,7 +37,7 @@ namespace PRM_ProjectAPI.Repository
             {
                 throw;
             }
-            
+
         }
 
         public bool deleteTool(int toolID)
@@ -98,7 +98,7 @@ namespace PRM_ProjectAPI.Repository
                                          }).FirstOrDefault();
             return tool;
         }
-        
+
         public bool updateTool(ToolDTO toolDTO)
         {
             var tool = _context.Tools.Where(toolInfo => toolInfo.Status == 1 && toolInfo.ToolId == toolDTO.ToolID).FirstOrDefault();

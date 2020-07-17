@@ -69,11 +69,90 @@ namespace PRM_ProjectAPI.Repository
 
             return list;
         }
+
+        public IEnumerable<ActorScenarioDetailDTO> GetAllScenarioComingByUsername(string username)
+        {
+            var list = _context.ActorScenarioDetails.Where(info => info.Status == 1
+                                                           && info.Actor.Username == username
+                                                           && DateTime.Compare(DateTime.Now, info.Scenario.StartOnDt) < 0)
+                                                    .Select(info => new ActorScenarioDetailDTO
+                                                    {
+                                                        AsdID = info.AsdId,
+                                                        ScenarioID = info.ScenarioId,
+                                                        ActorID = info.ActorId,
+                                                        CharacterName = info.CharacterName,
+                                                        CreateBy = info.CreateBy,
+                                                        Status = info.Status,
+                                                        FullName = info.Actor.FullName,
+                                                        ScenarioName = info.Scenario.ScenarioName,
+                                                        StartOnDt = info.Scenario.StartOnDt,
+                                                        EndOnDt = info.Scenario.EndOnDt,
+                                                    });
+
+            return list;
+        }
+
+        public IEnumerable<ActorScenarioDetailDTO> GetAllScenarioHistoryByUsername(string username)
+        {
+            var list = _context.ActorScenarioDetails.Where(info => info.Status == 1
+                                                           && info.Actor.Username == username
+                                                           && DateTime.Compare(DateTime.Now, info.Scenario.EndOnDt) > 0
+                                                           && DateTime.Compare(DateTime.Now, info.Scenario.StartOnDt) > 0)
+                                                    .Select(info => new ActorScenarioDetailDTO
+                                                    {
+                                                        AsdID = info.AsdId,
+                                                        ScenarioID = info.ScenarioId,
+                                                        ActorID = info.ActorId,
+                                                        CharacterName = info.CharacterName,
+                                                        CreateBy = info.CreateBy,
+                                                        Status = info.Status,
+                                                        FullName = info.Actor.FullName,
+                                                        ScenarioName = info.Scenario.ScenarioName,
+                                                        StartOnDt = info.Scenario.StartOnDt,
+                                                        EndOnDt = info.Scenario.EndOnDt,
+                                                    });
+
+            return list;
+        }
+
+        public IEnumerable<ActorScenarioDetailDTO> GetAllScenarioInProcessByUsername(string username)
+        {
+            var list = _context.ActorScenarioDetails.Where(info => info.Status == 1
+                                                           && info.Actor.Username == username
+                                                           && DateTime.Compare(DateTime.Now, info.Scenario.EndOnDt) < 0
+                                                           && DateTime.Compare(DateTime.Now, info.Scenario.StartOnDt) > 0)
+                                                    .Select(info => new ActorScenarioDetailDTO
+                                                    {
+                                                        AsdID = info.AsdId,
+                                                        ScenarioID = info.ScenarioId,
+                                                        ActorID = info.ActorId,
+                                                        CharacterName = info.CharacterName,
+                                                        CreateBy = info.CreateBy,
+                                                        Status = info.Status,
+                                                        FullName = info.Actor.FullName,
+                                                        ScenarioName = info.Scenario.ScenarioName,
+                                                        StartOnDt = info.Scenario.StartOnDt,
+                                                        EndOnDt = info.Scenario.EndOnDt,
+                                                    });
+
+            return list;
+        }
+
+        private async Task<int> checkDateFrom()
+        {
+            DateTime dateFrom = await _context.Scenarios.Select(date => date.StartOnDt).FirstOrDefaultAsync();
+            int check = DateTime.Compare(DateTime.Now, dateFrom);
+            return check;
+        }
     }
 
     public interface IActorScenarioDetailRepository
     {
         IEnumerable<ActorScenarioDetailDTO> GetAllAvailableByScenarioID(int scenarioID);
+
+        IEnumerable<ActorScenarioDetailDTO> GetAllScenarioHistoryByUsername(string username);
+        IEnumerable<ActorScenarioDetailDTO> GetAllScenarioInProcessByUsername(string username);
+        IEnumerable<ActorScenarioDetailDTO> GetAllScenarioComingByUsername(string username);
 
         void addActorToScenario(ActorScenarioDetailDTO actorScenarioDetailDTO);
 
