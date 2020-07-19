@@ -74,7 +74,8 @@ namespace PRM_ProjectAPI.Repository
         {
             var list = _context.ActorScenarioDetails.Where(info => info.Status == 1
                                                            && info.Actor.Username == username
-                                                           && DateTime.Compare(DateTime.Now, info.Scenario.StartOnDt) < 0)
+                                                           && DateTime.Compare(DateTime.UtcNow.AddHours(7), info.Scenario.StartOnDt) < 0
+                                                           && DateTime.Compare(DateTime.UtcNow.AddHours(7), info.Scenario.EndOnDt) < 0)
                                                     .Select(info => new ActorScenarioDetailDTO
                                                     {
                                                         AsdID = info.AsdId,
@@ -96,8 +97,8 @@ namespace PRM_ProjectAPI.Repository
         {
             var list = _context.ActorScenarioDetails.Where(info => info.Status == 1
                                                            && info.Actor.Username == username
-                                                           && DateTime.Compare(DateTime.Now, info.Scenario.EndOnDt) > 0
-                                                           && DateTime.Compare(DateTime.Now, info.Scenario.StartOnDt) > 0)
+                                                           && DateTime.Compare(DateTime.UtcNow.AddHours(7), info.Scenario.EndOnDt) > 0
+                                                           && DateTime.Compare(DateTime.UtcNow.AddHours(7), info.Scenario.StartOnDt) > 0)
                                                     .Select(info => new ActorScenarioDetailDTO
                                                     {
                                                         AsdID = info.AsdId,
@@ -117,9 +118,11 @@ namespace PRM_ProjectAPI.Repository
 
         public IEnumerable<ActorScenarioDetailDTO> GetAllScenarioInProcessByUsername(string username)
         {
+            Console.WriteLine(DateTime.UtcNow);
             var list = _context.ActorScenarioDetails.Where(info => info.Status == 1
                                                            && info.Actor.Username == username
-                                                           && DateTime.Compare(DateTime.Now, info.Scenario.StartOnDt) >= 0)
+                                                           && DateTime.Compare(DateTime.UtcNow.AddHours(7), info.Scenario.StartOnDt) >= 0
+                                                           && DateTime.Compare(DateTime.UtcNow.AddHours(7), info.Scenario.EndOnDt) < 0)
                                                     .Select(info => new ActorScenarioDetailDTO
                                                     {
                                                         AsdID = info.AsdId,
